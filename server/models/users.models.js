@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize');
 const { db } = require('../utils/database');
 
 const User = db.define('user', {
+  // se genera solo
   id: {
     primaryKey: true,
     autoIncrement: true,
@@ -13,6 +14,7 @@ const User = db.define('user', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  // se genera en random
   accountNumber: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -21,10 +23,14 @@ const User = db.define('user', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
+  // valor default
   amount: {
-    type: DataTypes.ENUM('milPesos'),
+    type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: '1000',
   },
+  // valor default
   status: {
     type: DataTypes.STRING,
     allowNull: false,

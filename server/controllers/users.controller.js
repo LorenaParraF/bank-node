@@ -1,52 +1,31 @@
 // import models
-const { validationResult } = require('express-validator');
-const { where } = require('sequelize/types');
+// const { validationResult } = require('express-validator');
 
 const { User } = require('../models/users.models');
 
 const signupCreateUsers = async (req, res) => {
   try {
-    const { name, accountNumber, password, amount, status } = req.body;
+    console.log(req.body);
+    const { name, password } = req.body;
 
-    const errors = validationResult(req);
+    // const errors = validationResult(req);
 
-    let randomAcount = Math.floor(Math.random() * 6) + 1;
-
-    //  const randomAcount () =>{
-
-    //  }
-
-    // const randomAcounts = await accountNumber.create({
-    //   where: Math.floor(Math.random() * 6) + 1,
-    // });
+    let accountNumber = Math.floor(
+      Math.random() * (99999999 - 100000) + 100000
+    );
 
     const newUserSignup = await User.create({
       name,
       password,
-      amount,
-      status,
-      accountNumber: randomAcount,
+      accountNumber,
     });
 
-    if (!errors.isEmpty()) {
-      console.log(errors.array());
-      res.status(400).json({});
-    } else {
-      res.status(200).json({
-        newUserSignup,
-      });
-    }
-
-    // if (!errors.isEmpty()) {
-    //   console.log(errors.array());
-    //   res.status(400).json({});
-    // } else
-    //   res.status(200).json({
-    //     newUserSignup,
-    //   });
-  } catch (error) {
+    res.status(200).json({
+      newUserSignup,
+    });
+  } catch (errors) {
     console.log({
-      error: 'there was a problem creating the user check your request ',
+      errors,
     });
   }
 };

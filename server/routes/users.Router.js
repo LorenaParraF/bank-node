@@ -10,11 +10,13 @@ const {
 
 const router = express.Router();
 
-router.post(
-  '/signup',
-  body('accountNumber').isLength({ min: 6 }),
-  signupCreateUsers
-);
+// router.post(
+//   '/signup',
+//   body('accountNumber').isLength({ min: 6 }),
+//   signupCreateUsers
+// );
+
+router.post('/signup', signupCreateUsers);
 router.post('/login', LoginUserPass);
 router.get('/:id/history', historyTransfers);
 

@@ -9,6 +9,11 @@ const Transfers = db.define('transfers', {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
+  userId: {
+    foreignKey: true,
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   amount: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -24,4 +29,4 @@ const Transfers = db.define('transfers', {
     allowNull: false,
   },
 });
-module.exports({ Transfers });
+module.exports = { Transfers };

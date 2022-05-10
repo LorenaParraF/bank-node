@@ -6,7 +6,13 @@ const { db } = require('./utils/database');
 const { usersRouter } = require('./routes/users.Router');
 const { transfersRouter } = require('./routes/transfers.Router');
 
+const { Transfers } = require('./models/transfers.models');
+const { User } = require('./models/users.models');
+
 const app = express();
+
+User.hasMany(Transfers);
+Transfers.belongsTo(User);
 
 // autenticar base de datos
 db.authenticate()
@@ -14,7 +20,7 @@ db.authenticate()
   .catch(err => console.log(err));
 
 // endpoints
-// http://localhost:4002/api/v1/users
+// http://localhost:4002/api/v1/users/
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/transfers', transfersRouter);
 
